@@ -6,7 +6,7 @@ Each fruit will have **name**, **description** and **price** attributes.
 
 **DEMO:** [http://mean-boilerplate.azurewebsites.net](http://mobgen-test.azurewebsites.net)
 
-* **demo username**: han.solo
+* **demo username**: han_solo
 * **demo password**: chewbacca
 
 ### Backend
