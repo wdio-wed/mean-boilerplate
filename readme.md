@@ -21,7 +21,7 @@ Jade template engine will be used for rendering views. Only one generic layout, 
 
 AngularJS will be used as frontend framework. Each view will have its controller.
 
-Communication with model will be implemented with AJAX instead of a data factory or provider because of simplicity matters.
+Communication with model will be implemented with AJAX instead of a data factory or provider to show of API reusability for mobiles apps, etc.
 
 ## Dependencies
 
