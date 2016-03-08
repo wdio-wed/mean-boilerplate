@@ -1,0 +1,43 @@
+{
+  "app": {
+    "name": "pencil"
+  },
+  "creator": {
+    "firstname": "Alejandro",
+    "lastname": "Martin"
+  },
+  "layout":{
+    "navbar":{
+      "title": "mis frutas",
+      "exit": "salir",
+      "add": "añadir fruta"
+    },
+    "footer":{
+      "about": "contacto",
+      "text": "<a href=\"http://alex030293.com\">alex030293</a> &copy; 2015"
+    }
+  },
+  "index":{
+    "title": "mis frutas",
+    "login": {
+      "title": "Hola!",
+      "username": "Usuario",
+      "password": "Contraseña",
+      "forget": "¿Olvidaste tu contraseña?",
+      "submit": "Entrar"
+    },
+    "card":{
+      "save": "guardar",
+      "delete": "eliminar",
+      "name": "Nombre",
+      "description": "Descripción",
+      "price": "Precio cent/kg"
+    },
+    "table":{
+      "name": "Nombre",
+      "description": "Descripción",
+      "price": "Precio €/kg",
+      "date":  "Fecha"
+    }
+  }
+}

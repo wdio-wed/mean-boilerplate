@@ -1,0 +1,54 @@
+extends layout
+include mixins/mixins_index
+
+block content
+    section.main
+        .clearfix
+            +login_form
+
+            .mdl-spinner.mdl-spinner--single-color.mdl-js-spinner.is-active(ng-show='loading')
+                
+            #blur(ng-show="editing && !loading")
+            .demo-card-wide.mdl-card.mdl-shadow--2dp(ng-controller="CardController", ng-show="editing && !loading")
+                .mdl-card__title
+                    h2.mdl-card__title-text {{fruit.name || "Insert data"}}
+
+                .mdl-card__supporting-text
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                        input.mdl-textfield__input(type="text", ng-model="fruit.name")
+                        label.mdl-textfield__label !{t('index.card.name')}
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                        input.mdl-textfield__input(type="text", ng-model="fruit.description")
+                        label.mdl-textfield__label !{t('index.card.description')}
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                        input.mdl-textfield__input(type="text", ng-model="fruit.price")
+                        label.mdl-textfield__label !{t('index.card.price')}
+
+                .mdl-card__actions.mdl-card--border
+                    a#delete-btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--accent.mdl-js-ripple-effect(ng-click="delete_card(fruit._id)", ng-show="fruit._id")
+                        | !{t('index.card.delete')}
+                    a#save-btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.mdl-js-ripple-effect(ng-click="save_fruit()")
+                        | !{t('index.card.save')}
+
+                .mdl-card__menu
+                    button.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect(ng-click="close_card()")
+                        i.material-icons close
+
+            table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp.ng-hide(ng-controller="TableController", ng-show="loggedIn && !loading", ng-init="update_fruits()")
+                thead
+                    tr
+                        th.mdl-data-table__cell--non-numeric ID
+                        th.mdl-data-table__cell--non-numeric !{t('index.table.name')}
+                        th.mdl-data-table__cell--non-numeric !{t('index.table.description')}
+                        th !{t('index.table.price')}
+                        th !{t('index.table.date')}
+                tbody
+                tbody(ng-repeat="f in fruit_list")   
+                    tr(ng-click="fruitClick(f._id)")
+                        td(class="mdl-data-table__cell--non-numeric", id="id") {{f._id}}
+                        td(class="mdl-data-table__cell--non-numeric") {{f.name}}
+                        td(class="mdl-data-table__cell--non-numeric") {{f.description}}
+                        td {{f.price/100 | currency}}
+                        td {{f.modified | date:'medium'}}

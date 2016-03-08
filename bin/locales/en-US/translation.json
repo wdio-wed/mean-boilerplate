@@ -1,0 +1,43 @@
+{
+  "app": {
+    "name": "fruit manager"
+  },
+  "creator": {
+    "firstname": "Alejandro",
+    "lastname": "Martin"
+  },
+  "layout":{
+    "navbar":{
+      "title": "fruit manager",
+      "exit": "exit",
+      "add": "add fruit"
+    },
+    "footer":{
+      "about": "contact",
+      "text": "<a href=\"http://alex030293.com\">alex030293</a> &copy; 2015"
+    }
+  },
+  "index":{
+    "title": "fruit manager",
+    "login": {
+      "title": "Hello!",
+      "username": "User",
+      "password": "Password",
+      "forget": "Forgot your password?",
+      "submit": "Send"
+    },
+    "card":{
+        "save": "save",
+        "delete": "delete",
+        "name": "Name",
+        "description": "Description",
+        "price": "Price ¢/kg"
+    },
+    "table":{
+        "name": "Name",
+        "description": "Description",
+        "price": "Price $/kg",
+        "date":  "Date"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+mixin custom_header(t, exit)
+    header
+        +navbar(t, exit)
+
+mixin navbar(_t, exit)
+    .navbar
+        .container
+            h1= _t
+            a(href='#', ng-show='loggedIn')
+                #add-fruit(ng-click="add_fruit()")
+                    i.zmdi.zmdi-plus.zmdi-3x
+                    | !{t('layout.navbar.add')}
+
+            a(ng-show='loggedIn', ng-click="logout($event)", href='')= exit
+
+mixin custom_footer(about_txt)
+    //- footer
+    h3.about(ng-show="loggedIn")= about_txt
+    footer(ng-show="loggedIn")
+        p !{t('layout.footer.text')}
+
+//- login
+mixin login_form
+    form.login#login(ng-controller="LoginController", ng-hide="loggedIn")
+        p.title= 'fruit manager'
+        img(src="/android-chrome-96x96.png")
+        //- loader
+
+        .login-wrapper#login-wrapper
+            input#username(tabindex="1", autocapitalize="off", autocorrect="off", type="text", placeholder="username", autofocus, , ng-model='username')
+            i.fa.fa-user
+            input#password(tabindex="2", type="password", placeholder="password", ng-model='password')
+            i.fa.fa-key
+
+            a(href="#")= 'Forgot your password?'
+            button(ng-click='send(username, password)')
+                i.spinner
+                span.state= 'submit'
