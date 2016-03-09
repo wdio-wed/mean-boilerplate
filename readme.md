@@ -4,7 +4,7 @@ This micro web application consist on a SPA (single page application) for managi
 
 Each fruit will have **name**, **description** and **price** attributes.
 
-**DEMO:** [http://mean-boilerplate.azurewebsites.net](http://mobgen-test.azurewebsites.net)
+**DEMO:** [http://mean-boilerplate.azurewebsites.net](http://mean-boilerplate.azurewebsites.net)
 
 * **demo username**: han_solo
 * **demo password**: chewbacca
@@ -41,5 +41,6 @@ DB connection string is hardcoded. I know it should be set as an ENV var, but it
 ## TO DO
 
 * Pagination in all queries (!important)
+* Store password hash
 * Responsive design
 * Retina graphics (@2x)

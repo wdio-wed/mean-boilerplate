@@ -4,7 +4,7 @@ var express = require('express'),
     userDAO = require('../model/DAO/userDAO');
 
 //USER login
-//curl -H "Content-Type: application/json" -X POST -d '{"username":"mobgen","password":"M0bg3n"}' http://localhost:8000/api/0.1/user/login
+//curl -H "Content-Type: application/json" -X POST -d '{"username":"han_solo","password":"chewbacca"}' http://localhost:8000/api/0.1/user/login
 router.post('/login', function (req, res){
     var d = domain.create();
 

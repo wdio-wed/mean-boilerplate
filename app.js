@@ -26,18 +26,6 @@ i18n.setLng('en-US', function(err, t) {
 app.use(i18n.handle);
 i18n.registerAppHelper(app);
 
-//i18n init
-i18n.init({ lng: 'en-US' }, function(err, t) {
-    if(err)
-        console.log(err);
-});
-i18n.setLng('en-US', function(err, t) {
-    if(err)
-        console.log(err);
-});
-app.use(i18n.handle);
-i18n.registerAppHelper(app);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
