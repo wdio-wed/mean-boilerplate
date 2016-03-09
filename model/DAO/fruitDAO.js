@@ -37,33 +37,6 @@ function readFruitById(id, callbacks){
     });
 }
 
-//READ all fruits
-function readFruits(callbacks){
-    return FruitModel.find(function (err, fruits) {
-        if (!err) {
-            console.log("[GET]   Get all fruits: " + JSON.stringify(fruits));
-            callbacks.success(fruits);
-            //return res.send(products);
-        } else {
-            console.log(err);
-            callbacks.error(err);
-        }
-    });
-}
-
-//READ fruit by id
-function readFruitById(id, callbacks){
-    return FruitModel.findById(id, function (err, fruit) {
-        if (!err) {
-            console.log("[GET]   Get fruit: " + JSON.stringify(fruit));
-            callbacks.success(fruit);
-        } else {
-            console.log(err);
-            callbacks.error(err);
-        }
-    });
-}
-
 //CREATE fruit function
 function createFruit(fruit, callbacks){
     fruit = new FruitModel({
