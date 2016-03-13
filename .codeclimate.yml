@@ -29,5 +29,6 @@ exclude_paths:
 - test/
 - test/**/*
 - spec/**/*
+- "**/img/**/*"
 - "**/vendor/**/*"
 - "**.json"
