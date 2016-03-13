@@ -1,5 +1,7 @@
 # MEAN boilerplate
 
+This is a MEAN stack app boilerplate (MongoDB, Express, AngularJS and Node.js)
+
 This micro web application consist on a SPA (single page application) for managing fruits.
 
 Each fruit will have **name**, **description** and **price** attributes.
@@ -37,6 +39,15 @@ Communication with model will be implemented with AJAX instead of a data factory
 ## Notes
 
 DB connection string is hardcoded. I know it should be set as an ENV var, but it´s hardcoded due to simplicity matters for the demo.
+
+## Test
+
+Run `npm test` to execute tests. Included tests:
+
+    * User unit tests
+    * User integration tests
+    * Fruit unit tests
+    * Fruit integration tests
 
 ## TO DO
 

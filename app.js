@@ -8,8 +8,8 @@ var express = require('express'),
     bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var userAPI = require('./routes/userAPI');
-var fruitAPI = require('./routes/fruitAPI');
+var userAPI = require('./routes/api/0.1/userAPI');
+var fruitAPI = require('./routes/api/0.1/fruitAPI');
 
 var dom = domain.create(),
     app = express();

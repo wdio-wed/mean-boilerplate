@@ -1,24 +1,44 @@
 var db = require('../../config/mongodb').init(),
     mongoose = require('mongoose');
 
+var isInTest = typeof global.it === 'function';
+
 var Schema = mongoose.Schema;
 var FruitSchema = new Schema({
-    name: { type: String, required: true, unique: true},
-    description: { type: String, required: true },
-    price: { type: Number },
-    modified: { type: Date, default: Date.now }
+    name:           { type: String, required: true, unique: true},
+    description:    { type: String, required: true },
+    price:          { type: Number },
+    modified:       { type: Date, default: Date.now }
 });
 var FruitModel = db.model('Fruit', FruitSchema);
+
+//CREATE new fruit
+function createFruit(fruit, callbacks){
+    var f = new FruitModel({
+        name:           fruit.name,
+        description:    fruit.description,
+        price:          fruit.price
+    });
+
+    f.save(function (err) {
+        if (!err) {
+            if(!isInTest) console.log("[ADD]   Fruit created with id: " + f._id);
+            callbacks.success(f);
+        } else {
+            if(!isInTest) console.log(err);
+            callbacks.error(err);
+        }
+    });
+}
 
 //READ all fruits
 function readFruits(callbacks){
     return FruitModel.find(function (err, fruits) {
         if (!err) {
-            console.log("[GET]   Get all fruits: " + JSON.stringify(fruits));
+            if(!isInTest) console.log('[GET]   Get fruits: ' + fruits.length);
             callbacks.success(fruits);
-            //return res.send(products);
         } else {
-            console.log(err);
+            if(!isInTest) console.log(err);
             callbacks.error(err);
         }
     });
@@ -28,29 +48,10 @@ function readFruits(callbacks){
 function readFruitById(id, callbacks){
     return FruitModel.findById(id, function (err, fruit) {
         if (!err) {
-            console.log("[GET]   Get fruit: " + JSON.stringify(fruit));
+            if(!isInTest) console.log('[GET]   Get fruit: ' + fruit._id);
             callbacks.success(fruit);
         } else {
-            console.log(err);
-            callbacks.error(err);
-        }
-    });
-}
-
-//CREATE fruit function
-function createFruit(fruit, callbacks){
-    fruit = new FruitModel({
-        name: fruit.name,
-        description: fruit.description,
-        price: fruit.price
-    });
-
-    fruit.save(function (err) {
-        if (!err) {
-            console.log("[ADD]   Fruit created with name: " + fruit.name);
-            callbacks.success();
-        } else {
-            console.log(err);
+            if(!isInTest) console.log(err);
             callbacks.error(err);
         }
     });
@@ -59,33 +60,44 @@ function createFruit(fruit, callbacks){
 //UPDATE fruit
 function updateFruit(id, fruit, callbacks){
     return FruitModel.findById(id, function (err, f) {
-        f.name = fruit.name;
-        f.description = fruit.description;
-        f.price = fruit.price;
-        return f.save(function (err) {
-            if (!err) {
-                console.log("[UDP]   Updated fruit: " + JSON.stringify(f));
-                callbacks.success(f);
-            } else {
-                console.log(err);
-                callbacks.error(err);
-            }
-        });
+        if (!err) {
+            if (fruit.name) f.name = fruit.name;
+            if (fruit.description) f.description = fruit.description;
+            if (fruit.price) f.price = fruit.price;
+
+            return f.save(function (err) {
+                if (!err) {
+                    if(!isInTest) console.log("[UDP]   Updated fruit: " + f._id);
+                    callbacks.success(f);
+                } else {
+                    if(!isInTest) console.log(err);
+                    callbacks.error(err);
+                }
+            });
+        } else {
+            if(!isInTest) console.log(err);
+            callbacks.error(err);
+        }
     });
 }
 
 //DELETE fruit
 function deleteFruit(id, callbacks){
-    return FruitModel.findById(id, function (err, fruit) {
-        return fruit.remove(function (err) {
-            if (!err) {
-                console.log("[DEL]    Deleted fruit: " + id);
-                callbacks.success();
-            } else {
-                console.log(err);
-                callbacks.error(err);
-            }
-        });
+    return FruitModel.findById(id, function (err, f) {
+        if (!err) {
+            return f.remove(function (err) {
+                if (!err) {
+                    if(!isInTest) console.log("[DEL]    Deleted fruit: " + f._id);
+                    callbacks.success(f);
+                } else {
+                    if(!isInTest) console.log(err);
+                    callbacks.error(err);
+                }
+            });
+        } else {
+            if(!isInTest) console.log(err);
+            callbacks.error(err);
+        }
     });
 }
 

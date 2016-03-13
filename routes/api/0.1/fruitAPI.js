@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     domain = require('domain'),
-    fruitDAO = require('../model/DAO/fruitDAO');
+    fruitDAO = require('./../../../model/DAO/fruitDAO');
 
 //CREATE a new fruit
 router.post('/', function (req, res){
@@ -18,8 +18,8 @@ router.post('/', function (req, res){
                 description: req.body.description,
                 price: req.body.price
             }, {
-            success: function(e){
-                res.status(201).send('Fruit created succesfully: '+req.body.name);
+            success: function(f){
+                res.status(201).send({msg: 'Fruit created succesfully: '+req.body.name, data: f});
             },
             error: function(err){
                 res.status(500).send(err);
@@ -63,7 +63,7 @@ router.get('/:id', function (req, res){
                 res.status(200).send(JSON.stringify(fruit));
             },
             error: function(err){
-                res.status(500).send(err);
+                res.status(404).send(err);
             }
         });
     });
@@ -84,7 +84,7 @@ router.put('/:id', function (req, res){
                 price: req.body.price
             }, {
             success: function(f){
-                res.status(200).send('Fruit updated succesfully: '+JSON.stringify(f));
+                res.status(200).send({msg: 'Fruit updated succesfully: '+JSON.stringify(f), data: f});
             },
             error: function(err){
                 res.status(500).send(err);
@@ -103,8 +103,8 @@ router.delete('/:id', function (req, res){
 
     d.run(function(){
         fruitDAO.deleteFruit(req.params.id ,{
-            success: function(){
-                res.status(200).send('Fruit deleted succesfully: ' + req.params.id);
+            success: function(f){
+                res.status(200).send({msg: 'Fruit deleted succesfully: ' + req.params.id, data: f});
             },
             error: function(err){
                 res.status(500).send(err);

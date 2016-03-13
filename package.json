@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "mocha test"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -15,5 +16,10 @@
     "serve-favicon": "~2.3.0",
     "mongoose": "~4.3.0",
     "i18next": "1.10.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "hippie": "^0.4.0",
+    "mocha": "^2.4.5"
   }
 }
