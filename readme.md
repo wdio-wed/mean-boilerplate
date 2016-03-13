@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-1.0-blue.svg) [![Build Status](https://travis-ci.org/alex030293/mean-boilerplate.svg?branch=master)](https://travis-ci.org/alex030293/mean-boilerplate) [![Test Coverage](https://codeclimate.com/github/alex030293/mean-boilerplate/badges/coverage.svg)](https://codeclimate.com/github/alex030293/mean-boilerplate/coverage) [![Code Climate](https://codeclimate.com/github/alex030293/mean-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/alex030293/mean-boilerplate) 
+![Version](https://img.shields.io/badge/version-1.0-blue.svg) [![Build Status](https://travis-ci.org/alex030293/mean-boilerplate.svg?branch=master)](https://travis-ci.org/alex030293/mean-boilerplate) [![Test Coverage](https://codeclimate.com/github/alex030293/mean-boilerplate/badges/coverage.svg)](https://codeclimate.com/github/alex030293/mean-boilerplate/coverage) [![Code Climate](https://codeclimate.com/github/alex030293/mean-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/alex030293/mean-boilerplate)
 
 
 # MEAN boilerplate
@@ -16,7 +16,7 @@ Each fruit will have **name**, **description** and **price** attributes.
 
 ### Backend
 
-Backend will be implement with MongoDB as database, running on ds056688.mongolab.com.
+Backend will be implement with MongoDB database, running on mongolab.com.
 
 Mongoose will be used as ODM in this project. Only two schemas will be defined, one defining a fruit and the other one definig a basic user profile.
 
