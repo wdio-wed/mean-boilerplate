@@ -44,10 +44,10 @@ DB connection string is hardcoded. I know it should be set as an ENV var, but it
 
 Run `npm test` to execute tests. Included tests:
 
-    * User unit tests
-    * User integration tests
-    * Fruit unit tests
-    * Fruit integration tests
+* User unit tests
+* User integration tests
+* Fruit unit tests
+* Fruit integration tests
 
 ## TO DO
 
