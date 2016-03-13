@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/alex030293/mean-boilerplate.svg?branch=master)](https://travis-ci.org/alex030293/mean-boilerplate)
-[![Test Coverage](https://codeclimate.com/github/alex030293/mean-boilerplate/badges/coverage.svg)](https://codeclimate.com/github/alex030293/mean-boilerplate/coverage)
+[![Build Status](https://travis-ci.org/alex030293/mean-boilerplate.svg?branch=master)](https://travis-ci.org/alex030293/mean-boilerplate) [![Test Coverage](https://codeclimate.com/github/alex030293/mean-boilerplate/badges/coverage.svg)](https://codeclimate.com/github/alex030293/mean-boilerplate/coverage) [![Code Climate](https://codeclimate.com/github/alex030293/mean-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/alex030293/mean-boilerplate) 
 
 
 # MEAN boilerplate
