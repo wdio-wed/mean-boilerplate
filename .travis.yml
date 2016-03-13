@@ -4,3 +4,7 @@ node_js:
   - '4'
 before_install:
 - 'npm install -g npm@latest'
+
+addons:
+    code_climate:
+        repo_token: bcb3ef1afac4bfe89b5d7c505b6da1d67dab6c86a4be194127b86598f25093f6
