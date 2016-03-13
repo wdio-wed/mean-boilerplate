@@ -105,11 +105,11 @@ function loginUser(user, callbacks){
                     callbacks.success(u[0]);
                 }else{
                     //Password mismatch
-                    callbacks.error({msg: 'Invalid login parameters'});
+                    callbacks.error({msg: 'Invalid login parameters', data: user});
                 }
             }else{
                 //User does not exist
-                callbacks.error({msg: 'Invalid login parameters'});
+                callbacks.error({msg: 'Invalid login parameters', data: user});
             }
         } else {
             callbacks.error(err);

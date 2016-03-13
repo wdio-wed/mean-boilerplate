@@ -1,8 +1,9 @@
 var hippie = require('hippie');
 var expect = require('chai').expect;
-var server = require('./../routes/api/0.1/userAPI');
-
 var userDAO = require('./../model/DAO/userDAO');
+
+var app = require('../app.js');
+var request = require('supertest')(app);
 
 describe('UserService', function () {
     var user1 = {
@@ -44,28 +45,28 @@ describe('UserService', function () {
     describe('POST /users/', function () {
         it('creates a new user', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
+
+            request
+            .post('/api/0.1/user/')
             .send(user1)
-            .post('http://localhost:8000/api/0.1/user/')
-            .expectStatus(201)
-            .end(function(err, res, body) {
-                user1._id = body.data._id;
+            .expect(201)
+            .end(function(err, res){
                 if (err) throw err;
+                    user1._id = res.body.data._id;
                 done();
             });
         });
     });
 
-    describe('POST /users/', function () {
+    describe('POST /user/', function () {
         it('tries to create a duplicated user', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
+
+            request
+            .post('/api/0.1/user/')
             .send(user1)
-            .post('http://localhost:8000/api/0.1/user/')
-            .expectStatus(500)
-            .end(function(err, res, body) {
+            .expect(500)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
@@ -75,7 +76,7 @@ describe('UserService', function () {
     describe('POST /users/', function () {
         it('tries to create an invalid user', function (done) {
             this.timeout(10000);
-            hippie()
+            hippie(server)
             .json()
             .send(invalid_user)
             .post('http://localhost:8000/api/0.1/user/')
@@ -87,28 +88,28 @@ describe('UserService', function () {
         });
     });
 */
-    describe('GET /users/', function () {
+    describe('GET /user/', function () {
         it('returns all users', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
-            .get('http://localhost:8000/api/0.1/user/')
-            .expectStatus(200)
-            .end(function(err, res, body) {
+
+            request
+            .get('/api/0.1/user/')
+            .expect(200)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
         });
     });
 
-    describe('GET /users/:id', function () {
+    describe('GET /user/:id', function () {
         it('returns a user based on the id', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
-            .get('http://localhost:8000/api/0.1/user/56e04bd195d9b21ca8062d27')
-            .expectStatus(200)
-            .end(function(err, res, body) {
+
+            request
+            .get('/api/0.1/user/'+user1._id)
+            .expect(200)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
@@ -118,11 +119,11 @@ describe('UserService', function () {
     describe('GET /users/:id', function () {
         it('tries to read user with non-existing id', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
-            .get('http://localhost:8000/api/0.1/user/nonvalidid')
-            .expectStatus(404)
-            .end(function(err, res, body) {
+
+            request
+            .get('/api/0.1/user/nonvalidid')
+            .expect(404)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
@@ -133,15 +134,14 @@ describe('UserService', function () {
         it('updates user', function (done) {
             this.timeout(10000);
             user2.username = 'foo';
-            hippie()
-            .json()
+
+            request
+            .put('/api/0.1/user/'+user2._id)
             .send(user2)
-            .method('PUT')
-            .url('http://localhost:8000/api/0.1/user/'+user2._id)
-            .expectStatus(200)
-            .end(function(err, res, body) {
+            .expect(200)
+            .end(function(err, res){
                 if (err) throw err;
-                expect(body.data.username).to.eql('foo');
+                expect(res.body.data.username).to.eql('foo');
                 done();
             });
         });
@@ -151,13 +151,12 @@ describe('UserService', function () {
         it('updates user with invalid username', function (done) {
             this.timeout(10000);
             user2.username = undefined;
-            hippie()
-            .json()
+
+            request
+            .put('/api/0.1/user/'+user2._id)
             .send(user2)
-            .method('PUT')
-            .url('http://localhost:8000/api/0.1/user/'+user2._id)
-            .expectStatus(500)
-            .end(function(err, res, body) {
+            .expect(500)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
@@ -168,13 +167,12 @@ describe('UserService', function () {
         it('updates non-existing user', function (done) {
             this.timeout(10000);
             user2.username = 'foo';
-            hippie()
-            .json()
+
+            request
+            .put('/api/0.1/user/nonvalidid')
             .send(user2)
-            .method('PUT')
-            .url('http://localhost:8000/api/0.1/user/nonvalidid')
-            .expectStatus(500)
-            .end(function(err, res, body) {
+            .expect(500)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
@@ -184,12 +182,13 @@ describe('UserService', function () {
     describe('POST /users/login', function () {
         it('tries to login a user', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
+
+            request
+            .post('/api/0.1/user/login')
             .send(user1)
-            .post('http://localhost:8000/api/0.1/user/login')
-            .expectStatus(200)
-            .end(function(err, res, body) {
+            .expect(200)
+            .end(function(err, res){
+                console.log(res.body.data);
                 if (err) throw err;
                 done();
             });
@@ -199,12 +198,11 @@ describe('UserService', function () {
     describe('DELETE /users/:id', function () {
         it('deletes user', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
-            .method('DELETE')
-            .url('http://localhost:8000/api/0.1/user/'+user2._id)
-            .expectStatus(200)
-            .end(function(err, res, body) {
+
+            request
+            .del('/api/0.1/user/'+user2._id)
+            .expect(200)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
@@ -214,12 +212,11 @@ describe('UserService', function () {
     describe('DELETE /users/:id', function () {
         it('deletes non-existing user', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
-            .method('DELETE')
-            .url('http://localhost:8000/api/0.1/user/nonvalidid')
-            .expectStatus(500)
-            .end(function(err, res, body) {
+
+            request
+            .del('/api/0.1/user/nonvalidid')
+            .expect(500)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });

@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/alex030293/mean-boilerplate.svg?branch=master)](https://travis-ci.org/alex030293/mean-boilerplate)
+
 # MEAN boilerplate
 
 This is a MEAN stack app boilerplate (MongoDB, Express, AngularJS and Node.js)

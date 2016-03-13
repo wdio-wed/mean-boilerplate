@@ -1,7 +1,9 @@
 var hippie = require('hippie');
 var expect = require('chai').expect;
-
 var fruitDAO = require('./../model/DAO/fruitDAO');
+
+var app = require('../app.js');
+var request = require('supertest')(app);
 
 describe('FruitService', function () {
     var fruit1 = {
@@ -46,14 +48,14 @@ describe('FruitService', function () {
     describe('POST /fruit/', function () {
         it('creates a new fruit', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
+
+            request
+            .post('/api/0.1/fruit/')
             .send(fruit1)
-            .post('http://localhost:8000/api/0.1/fruit/')
-            .expectStatus(201)
-            .end(function(err, res, body) {
-                fruit1._id = body.data._id;
+            .expect(201)
+            .end(function(err, res){
                 if (err) throw err;
+                fruit1._id = res.body.data._id;
                 done();
             });
         });
@@ -62,12 +64,12 @@ describe('FruitService', function () {
     describe('POST /fruit/', function () {
         it('tries to create a duplicated fruit', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
+
+            request
+            .post('/api/0.1/fruit/')
             .send(fruit1)
-            .post('http://localhost:8000/api/0.1/fruit/')
-            .expectStatus(500)
-            .end(function(err, res, body) {
+            .expect(500)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
@@ -77,11 +79,11 @@ describe('FruitService', function () {
     describe('GET /fruit/', function () {
         it('returns all fruits', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
-            .get('http://localhost:8000/api/0.1/fruit/')
-            .expectStatus(200)
-            .end(function(err, res, body) {
+
+            request
+            .get('/api/0.1/fruit')
+            .expect(200)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
@@ -91,11 +93,10 @@ describe('FruitService', function () {
     describe('GET /fruit/:id', function () {
         it('returns a fruit based on the id', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
-            .get('http://localhost:8000/api/0.1/fruit/'+fruit1._id)
-            .expectStatus(200)
-            .end(function(err, res, body) {
+            request
+            .get('/api/0.1/fruit/'+fruit1._id)
+            .expect(200)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
@@ -105,11 +106,11 @@ describe('FruitService', function () {
     describe('GET /fruit/:id', function () {
         it('tries to read a fruit with non-existing id', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
-            .get('http://localhost:8000/api/0.1/fruit/nonvalidid')
-            .expectStatus(404)
-            .end(function(err, res, body) {
+
+            request
+            .get('/api/0.1/fruit/nonvalidid')
+            .expect(404)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
@@ -119,16 +120,16 @@ describe('FruitService', function () {
     describe('UPDATE /fruit/:id', function () {
         it('updates fruit', function (done) {
             this.timeout(10000);
+
             fruit2.price = 300;
-            hippie()
-            .json()
+
+            request
+            .put('/api/0.1/fruit/'+fruit2._id)
             .send(fruit2)
-            .method('PUT')
-            .url('http://localhost:8000/api/0.1/fruit/'+fruit2._id)
-            .expectStatus(200)
-            .end(function(err, res, body) {
+            .expect(200)
+            .end(function(err, res){
                 if (err) throw err;
-                expect(body.data.price).to.eql(300);
+                expect(res.body.data.price).to.eql(300);
                 done();
             });
         });
@@ -138,16 +139,16 @@ describe('FruitService', function () {
         it('updates fruit with duplicated name', function (done) {
             this.timeout(10000);
             fruit2.name = fruit1.name;
-            hippie()
-            .json()
+
+            request
+            .put('/api/0.1/fruit/'+fruit2._id)
             .send(fruit2)
-            .method('PUT')
-            .url('http://localhost:8000/api/0.1/fruit/'+fruit2._id)
-            .expectStatus(500)
-            .end(function(err, res, body) {
+            .expect(500)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
+
         });
     });
 
@@ -155,13 +156,12 @@ describe('FruitService', function () {
         it('updates non-existing fruit', function (done) {
             this.timeout(10000);
             fruit2.price = 400;
-            hippie()
-            .json()
+
+            request
+            .put('/api/0.1/fruit/nonvalidid')
             .send(fruit2)
-            .method('PUT')
-            .url('http://localhost:8000/api/0.1/fruit/nonvalidid')
-            .expectStatus(500)
-            .end(function(err, res, body) {
+            .expect(500)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
@@ -171,12 +171,11 @@ describe('FruitService', function () {
     describe('DELETE /fruit/:id', function () {
         it('deletes fruit', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
-            .method('DELETE')
-            .url('http://localhost:8000/api/0.1/fruit/'+fruit2._id)
-            .expectStatus(200)
-            .end(function(err, res, body) {
+
+            request
+            .del('/api/0.1/fruit/'+fruit2._id)
+            .expect(200)
+            .end(function(err, res){
                 if (err) throw err;
                 done();
             });
@@ -186,12 +185,11 @@ describe('FruitService', function () {
     describe('DELETE /fruit/:id', function () {
         it('deletes non-existing fruit', function (done) {
             this.timeout(10000);
-            hippie()
-            .json()
-            .method('DELETE')
-            .url('http://localhost:8000/api/0.1/fruit/nonvalidid')
-            .expectStatus(500)
-            .end(function(err, res, body) {
+
+            request
+            .del('/api/0.1/fruit/nonvalidid')
+            .expect(500)
+            .end(function(err, res, body){
                 if (err) throw err;
                 done();
             });
