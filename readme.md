@@ -9,6 +9,8 @@ This micro web application consist on a SPA (single page application) for managi
 
 Each fruit will have **name**, **description** and **price** attributes.
 
+Users will have **username** and **password**.
+
 **DEMO:** [http://mean-boilerplate.azurewebsites.net](http://mean-boilerplate.azurewebsites.net)
 
 * **demo username**: han_solo
