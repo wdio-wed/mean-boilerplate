@@ -1,5 +1,4 @@
-angular.module('FruitApp.LoginController', []);
-angular.module('FruitApp.LoginController')
+angular.module('FruitApp.LoginController', [])
 .controller('LoginController', ['$scope', 'userFactory', function ($scope, userFactory) {
     //Login form listener
     var working = false;

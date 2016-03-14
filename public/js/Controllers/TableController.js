@@ -1,5 +1,4 @@
-angular.module('FruitApp.TableController', []);
-angular.module('FruitApp.TableController')
+angular.module('FruitApp.TableController', [])
 .controller('TableController', ['$scope', 'fruitFactory', function ($scope, fruitFactory) {
     //Update fruits
     $scope.$parent.update_fruits = function(){

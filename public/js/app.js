@@ -1,6 +1,5 @@
-var app = angular.module('FruitApp', ['ngRoute', 'ngResource', 'FruitApp.FruitService', 'FruitApp.UserService', 'FruitApp.LoginController', 'FruitApp.TableController', 'FruitApp.CardController']);
-
-app.controller('MainController',  ['$scope', '$http', function ($scope, $http) {
+var app = angular.module('FruitApp', ['ngRoute', 'ngResource', 'FruitApp.FruitService', 'FruitApp.UserService', 'FruitApp.LoginController', 'FruitApp.TableController', 'FruitApp.CardController'])
+.controller('MainController',  ['$scope', '$http', function ($scope, $http) {
     //State vars initialization
     $scope.loading = true;
     $scope.loggedIn = getCookie('username') != "";

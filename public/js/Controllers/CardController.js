@@ -1,5 +1,4 @@
-angular.module('FruitApp.CardController', []);
-angular.module('FruitApp.CardController')
+angular.module('FruitApp.CardController', [])
 .controller('CardController', ['$scope', 'fruitFactory', function ($scope, fruitFactory) {
     //Close card handler
     $scope.close_card = function(){

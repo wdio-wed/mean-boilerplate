@@ -36,7 +36,7 @@ block content
                     button.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect(ng-click="close_card()")
                         i.material-icons close
 
-            table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp.ng-hide(ng-controller="TableController", ng-show="loggedIn && !loading", ng-init="update_fruits()")
+            table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp.ng-hide(ng-controller="TableController", ng-show="loggedIn", ng-init="update_fruits()")
                 thead
                     tr
                         th.mdl-data-table__cell--non-numeric ID
