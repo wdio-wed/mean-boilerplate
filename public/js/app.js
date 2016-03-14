@@ -1,4 +1,4 @@
-var app = angular.module('FruitApp', ['FruitApp.FruitService', 'FruitApp.UserService', 'FruitApp.LoginController', 'FruitApp.TableController', 'FruitApp.CardController']);
+var app = angular.module('FruitApp', ['ngRoute', 'ngResource', 'FruitApp.FruitService', 'FruitApp.UserService', 'FruitApp.LoginController', 'FruitApp.TableController', 'FruitApp.CardController']);
 
 app.controller('MainController',  ['$scope', '$http', function ($scope, $http) {
     //State vars initialization

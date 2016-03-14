@@ -5,19 +5,18 @@ angular.module('FruitApp.TableController')
     $scope.$parent.update_fruits = function(){
         $scope.$parent.loading = true;
         //Load fruits
-        fruitFactory.readFruits(function(response) {
+        fruitFactory.query().$promise.then(function(response) {
             //$('tbody').html('');
-            $scope.$parent.fruit_list = response.data;
-            console.log($scope.fruit_list);
+            $scope.$parent.fruit_list = response;
             $scope.$parent.loading = false;
 
             $scope.fruitClick =  function(id) {
                 $scope.$parent.loading = true;
                 $scope.$parent.editing = true;
-                fruitFactory.readFruit(id,
+                fruitFactory.get({id: id},
                     function(response) {
-                        console.log(response.data);
-                        $scope.$parent.fruit = response.data;
+                        console.log(response);
+                        $scope.$parent.fruit = response;
                         $scope.$parent.loading = false;
 
                         //Floating label layout fix
