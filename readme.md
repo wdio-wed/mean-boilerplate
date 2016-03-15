@@ -3,7 +3,7 @@
 
 # MEAN boilerplate
 
-This is a MEAN stack app boilerplate (MongoDB, Express, AngularJS and Node.js)
+This is a MEAN stack app boilerplate (MongoDB, Express, AngularJS and Node.js) based on Express app skeleton.
 
 This micro web application consist on a SPA (single page application) for managing fruits.
 
