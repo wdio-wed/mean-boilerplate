@@ -8,8 +8,8 @@ block content
 
             .mdl-spinner.mdl-spinner--single-color.mdl-js-spinner.is-active(ng-show='loading')
                 
-            #blur(ng-show="editing && !loading")
-            .demo-card-wide.mdl-card.mdl-shadow--2dp(ng-controller="CardController", ng-show="editing && !loading")
+            #blur.ng-hide(ng-show="editing && !loading")
+            .demo-card-wide.mdl-card.mdl-shadow--2dp.ng-hide(ng-controller="CardController", ng-show="editing && !loading")
                 .mdl-card__title
                     h2.mdl-card__title-text {{fruit.name || "Insert data"}}
 
@@ -51,4 +51,4 @@ block content
                         td(class="mdl-data-table__cell--non-numeric") {{f.name}}
                         td(class="mdl-data-table__cell--non-numeric") {{f.description}}
                         td {{f.price/100 | currency}}
-                        td {{f.modified | date:'medium'}}
+                        td {{f.dateAdded | date:"dd/MM/yyyy 'at' h:mma"}}

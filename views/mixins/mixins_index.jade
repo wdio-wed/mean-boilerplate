@@ -21,7 +21,7 @@ mixin custom_footer(about_txt)
 
 //- login
 mixin login_form
-    form.login#login(ng-controller="LoginController", ng-hide="loggedIn")
+    form.login.ng-hide#login(ng-controller="LoginController", ng-hide="loggedIn")
         p.title= 'fruit manager'
         img(src="/android-chrome-96x96.png")
         //- loader

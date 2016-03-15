@@ -8,7 +8,7 @@ var FruitSchema = new Schema({
     name:           { type: String, required: true, unique: true},
     description:    { type: String, required: true },
     price:          { type: Number },
-    modified:       { type: Date, default: Date.now }
+    dateAdded:      { type: Date, default: Date.now }
 });
 var FruitModel = db.model('Fruit', FruitSchema);
 
@@ -34,7 +34,7 @@ function createFruit(fruit, callbacks){
 //READ all fruits
 function readFruits(skip, count, callbacks){
     return FruitModel.find()
-    .skip(skip).limit(count).exec('find', function (err, fruits) {
+    .sort('-dateAdded').skip(skip).limit(count).exec('find', function (err, fruits) {
         if (!err) {
             if(!isInTest) console.log('[GET]   Get fruits: ' + fruits.length);
             callbacks.success(fruits);
