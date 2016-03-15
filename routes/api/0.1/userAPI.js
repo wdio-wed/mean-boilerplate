@@ -33,6 +33,8 @@ router.post('/', function (req, res){
 //READ all Users
 router.get('/', function(req, res, next) {
     var d = domain.create();
+    var skip = req.params.skip;
+    var count = req.params.count;
 
     d.on('error', function(error){
         if(!isInTest) console.log(error.stacktrace);
@@ -40,7 +42,7 @@ router.get('/', function(req, res, next) {
     });
 
     d.run(function(){
-        userDAO.readUsers({
+        userDAO.readUsers(skip, count, {
             success: function(Users){
                 res.status(200).send(JSON.stringify(Users));
             },

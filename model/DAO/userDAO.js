@@ -14,8 +14,9 @@ var UserSchema = new Schema({
 var UserModel = db.model('User', UserSchema);
 
 //READ all users
-function readUsers(callbacks){
-    return UserModel.find(function (err, users) {
+function readUsers(skip, count, callbacks){
+    return UserModel.find()
+    .skip(skip).limit(count).exec('find', function (err, users) {
         if (!err) {
             if(!isInTest) console.log("[GET]   Get all users: " + JSON.stringify(users));
             callbacks.success(users);

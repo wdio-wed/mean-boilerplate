@@ -32,8 +32,9 @@ function createFruit(fruit, callbacks){
 }
 
 //READ all fruits
-function readFruits(callbacks){
-    return FruitModel.find(function (err, fruits) {
+function readFruits(skip, count, callbacks){
+    return FruitModel.find()
+    .skip(skip).limit(count).exec('find', function (err, fruits) {
         if (!err) {
             if(!isInTest) console.log('[GET]   Get fruits: ' + fruits.length);
             callbacks.success(fruits);

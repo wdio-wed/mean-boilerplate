@@ -31,13 +31,16 @@ router.post('/', function (req, res){
 //READ all fruits
 router.get('/', function(req, res, next) {
     var d = domain.create();
+    var skip = req.params.skip;
+    var count = req.params.count;
+
     d.on('error', function(error){
         console.log(error.stacktrace);
         res.status(500).send({'error': error.message});
     });
 
     d.run(function(){
-        fruitDAO.readFruits({
+        fruitDAO.readFruits(skip, count, {
             success: function(fruits){
                 res.status(200).send(JSON.stringify(fruits));
             },

@@ -56,7 +56,6 @@ Run `npm test` to execute tests. Included tests:
 
 ## TO DO
 
-* Pagination in all queries (!important)
-* Store password hash
+* Store user password hash instead of the actual password in plain text
 * Responsive design
 * Retina graphics (@2x)
