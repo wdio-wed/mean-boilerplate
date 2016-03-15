@@ -33,8 +33,8 @@ router.post('/', function (req, res){
 //READ all Users
 router.get('/', function(req, res, next) {
     var d = domain.create();
-    var skip = req.params.skip;
-    var count = req.params.count;
+    var skip = req.query.skip;
+    var count = req.query.count;
 
     d.on('error', function(error){
         if(!isInTest) console.log(error.stacktrace);
