@@ -5,9 +5,18 @@ var isInTest = typeof global.it === 'function';
 
 var Schema = mongoose.Schema;
 var UserSchema = new Schema({
-    created:    { type: Date,   default: Date.now },
     username:   { type: String, required: true, unique: true},
-    password:   { type: String, required: true }
+    password:   { type: String, required: true },
+    dateCreated:    { type: Date},
+    dateModified:   { type: Date}
+});
+UserSchema.pre('save', function(next){
+    now = new Date();
+    this.dateModified = now;
+    if ( !this.dateCreated ) {
+        this.dateCreated = now;
+    }
+    next();
 });
 
 //Set up schema
@@ -16,7 +25,7 @@ var UserModel = db.model('User', UserSchema);
 //READ all users
 function readUsers(skip, count, callbacks){
     return UserModel.find()
-    .skip(skip).limit(count).exec('find', function (err, users) {
+    .sort('-dateCreated').skip(skip).limit(count).exec('find', function (err, users) {
         if (!err) {
             if(!isInTest) console.log("[GET]   Get all users: " + JSON.stringify(users));
             callbacks.success(users);

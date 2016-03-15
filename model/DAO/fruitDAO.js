@@ -8,7 +8,16 @@ var FruitSchema = new Schema({
     name:           { type: String, required: true, unique: true},
     description:    { type: String, required: true },
     price:          { type: Number },
-    dateAdded:      { type: Date, default: Date.now }
+    dateCreated:    { type: Date},
+    dateModified:   { type: Date}
+});
+FruitSchema.pre('save', function(next){
+    now = new Date();
+    this.dateModified = now;
+    if ( !this.dateCreated ) {
+        this.dateCreated = now;
+    }
+    next();
 });
 var FruitModel = db.model('Fruit', FruitSchema);
 

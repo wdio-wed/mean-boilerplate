@@ -31,8 +31,8 @@ router.post('/', function (req, res){
 //READ all fruits
 router.get('/', function(req, res, next) {
     var d = domain.create();
-    var skip = req.params.skip;
-    var count = req.params.count;
+    var skip = req.query.skip;
+    var count = req.query.count;
 
     d.on('error', function(error){
         console.log(error.stacktrace);
