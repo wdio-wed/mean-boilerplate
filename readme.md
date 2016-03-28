@@ -40,6 +40,7 @@ Communication with model will be implemented with AJAX instead of a data factory
 * **morgan** ~1.6.1
 * **serve-favicon** ~2.3.0
 * **mongoose** ~4.3.0
+* **i18next** 1.10.3
 
 ## Notes
 
@@ -59,3 +60,4 @@ Run `npm test` to execute tests. Included tests:
 * Store user password hash instead of the actual password in plain text
 * Responsive design
 * Retina graphics (@2x)
+* Upgrade i18next (Deprecated)
