@@ -60,4 +60,4 @@ Run `npm test` to execute tests. Included tests:
 * Store user password hash instead of the actual password in plain text
 * Responsive design
 * Retina graphics (@2x)
-* Upgrade i18next (Deprecated)
+* Upgrade i18next (deprecated)
