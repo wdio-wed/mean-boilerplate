@@ -42,15 +42,7 @@ app.use('/', routes);
 app.use('/api/0.1/user', userAPI);
 app.use('/api/0.1/fruit', fruitAPI);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
 // error handlers
-
 app.use(function(error, req, res, next){
     if(domain.active){
         console.info('caught with domain ', domain.active);
